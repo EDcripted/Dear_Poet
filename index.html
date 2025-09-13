@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="style.css" />
+  <title>famille</title>
+
+  <!-- small inline styles for the music button / hint -->
+  <style>
+    #music-btn{
+      position: fixed;
+      right: 20px;
+      top: 20px;
+      z-index: 9999;
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: blue;
+      color: pink;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    #music-hint{
+      position: fixed;
+      right: 20px;
+      top: 64px;
+      z-index: 9999;
+      padding: 6px 10px;
+      border-radius: 6px;
+      background: rgba(0,0,0,0.7);
+      color: #fff;
+      display: none;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Birthday Text -->
+  <div class="txt">
+    <h1>Happy Birthday Granty 💝</h1>
+  </div>
+  
+  <!-- Cake -->
+  <div class="birthday-cake">
+    <div class="holder"></div>
+    <div class="shadow"></div>
+    <div class="cake">
+      <div class="chocolate"></div>
+    </div>
+    <div class="candle"></div>
+    <div class="flame"></div>
+  </div>
+
+  <!-- audio (rename your file to unlike-me.mp3 and place it next to this HTML, or change the src) -->
+  <audio id="bg-music" loop preload="auto">
+    <source src="AP.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Play / Pause button so user can start music (avoids autoplay block) -->
+  <button id="music-btn" aria-pressed="false">Play Music</button>
+  <div id="music-hint">Click to start audio (browser requires interaction)</div>
+
+  <!-- Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <!-- Confetti Trigger -->
+  <script>
+    const txt = document.querySelector('.txt');
+    txt.addEventListener("mouseenter", () => {
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.3 }
+      });
+    });
+  </script>
+
+  <!-- Flame + Smoke + Music controls -->
+  <script>
+    const music = document.getElementById('bg-music');
+    const musicBtn = document.getElementById('music-btn');
+    const hint = document.getElementById('music-hint');
+    let isPlaying = false;
+
+    function updateBtn(){
+      musicBtn.textContent = isPlaying ? 'Pause Music' : 'Play Music';
+      musicBtn.setAttribute('aria-pressed', String(isPlaying));
+    }
+
+    // Toggle Play / Pause from button
+    musicBtn.addEventListener('click', () => {
+      if (!isPlaying) {
+        music.play()
+          .then(() => {
+            isPlaying = true;
+            updateBtn();
+            hint.style.display = 'none';
+          })
+          .catch(err => {
+            console.error('Audio play failed:', err);
+            hint.style.display = 'block';
+            // Keep button so user can try again
+          });
+      } else {
+        music.pause();
+        isPlaying = false;
+        updateBtn();
+      }
+    });
+
+    // If music can be buffered, enable the button (optional)
+    music.addEventListener('canplaythrough', () => {
+      musicBtn.disabled = false;
+    });
+
+    // Keep UI in sync if audio ends
+    music.addEventListener('pause', () => { isPlaying = false; updateBtn(); });
+    music.addEventListener('play', () => { isPlaying = true; updateBtn(); });
+
+    // Flame click: create smoke, relight AND attempt to start music (user gesture)
+    document.querySelector(".flame").addEventListener("click", function() {
+      // Attempt to play music here (this click counts as user gesture)
+      if (!isPlaying) {
+        music.play()
+          .then(() => {
+            isPlaying = true;
+            updateBtn();
+            hint.style.display = 'none';
+          })
+          .catch(err => {
+            console.log('play blocked:', err);
+            hint.style.display = 'block';
+          });
+      }
+
+      let flame = this;
+      flame.style.display = "none"; // hide flame
+
+      // create smoke puffs
+      for (let i = 0; i < 3; i++) {
+        let s = document.createElement("div");
+        s.className = "smoke";
+        s.style.left = (25 + i*10) + "px";
+        s.style.animationDelay = (i * 0.5) + "s";
+        document.querySelector(".birthday-cake").appendChild(s);
+      }
+
+      // relight flame after 3 seconds
+      setTimeout(() => {
+        flame.style.display = "block";
+
+        // show text
+        let msg = document.createElement("div");
+        msg.className = "birthday-text";
+        msg.textContent = " Love's flame within me burns for you alone ";
+        document.body.appendChild(msg);
+
+        // remove message after 5s
+        setTimeout(() => {
+          msg.remove();
+        }, 10000);
+      }, 5000);
+    });
+  </script>
+
+</body>
+</html>
