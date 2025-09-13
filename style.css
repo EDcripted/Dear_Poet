@@ -1,211 +1,183 @@
 body {
-    background-color: #9B4F96; /* keeps your orange tint */
-    background-image: url("Hi.jpeg"); /* your uploaded image */
-    background-repeat: no-repeat; /* prevents tiling */
-    background-position: center center; /* keeps it centered */
-    background-size: contain; /* keeps the full image visible without cropping */
-    
-    /* Orange transparency effect */
-    background-blend-mode: overlay;
+  background-color: #9B4F96;
+  background-image: url("Hi.jpeg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-blend-mode: overlay;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
-
-.txt{
-    color: white;
-    margin-right: 50px;
-    font-style:italic ;
-    
+.txt {
+  color: white;
+  text-align: center;
+  font-style: italic;
+  margin-bottom: 1rem;
 }
 
-
-.birthday-cake{
-    position: relative;
-    top: 20px;
-    left: 120px;
+.txt h1 {
+  font-size: 2.5rem;
 }
 
-.holder{
-    position: absolute;
-    width:350px;
-    height:20px;
-    border-radius:100px;
-    background-color: gold;
-    left: -140px;
-    top:10px;
-
-
+/* Cake wrapper */
+.birthday-cake {
+  position: relative;
+  margin-top: 1rem;
+  transform: scale(0.9);
 }
 
-.holder:before{
-    content:"";
-    position: absolute;
-    width: 100px;
-    height: 150px;
-    background-color: white;
-    left:125px;
-    top: 20px;
-
+/* Holder */
+.holder {
+  position: absolute;
+  width: 60vw;
+  max-width: 350px;
+  height: 20px;
+  border-radius: 100px;
+  background-color: gold;
+  left: -40%;
+  top: 10px;
 }
 
-
-.holder:after{
-    content: "";
-    position: absolute;
-    background-color: #9B4F96;
-    width: 100px;
-    height:135px;
-    border-radius: 30px 30px 0 0;
-    left: 65px;
-    top: 20px;
-    box-shadow: 125px 0 #9B4F96;
-
+.holder:before {
+  content:"";
+  position: absolute;
+  width: 100px;
+  height: 150px;
+  background-color: white;
+  left: 125px;
+  top: 20px;
 }
 
+.holder:after {
+  content: "";
+  position: absolute;
+  background-color: #9B4F96;
+  width: 100px;
+  height:135px;
+  border-radius: 30px 30px 0 0;
+  left: 65px;
+  top: 20px;
+  box-shadow: 125px 0 #9B4F96;
+}
+
+/* Shadow */
 .shadow {
-    position: absolute;
-    width: 350px;
-    height: 20px;
-    border-radius: 50%;
-    top: 170px;
-    left: -135px;
-    background-color: rgba(0,0,0,0.095);
-    z-index:1;
+  position: absolute;
+  width: 60vw;
+  max-width: 350px;
+  height: 20px;
+  border-radius: 50%;
+  top: 170px;
+  left: -40%;
+  background-color: rgba(0,0,0,0.095);
+  z-index:1;
 }
 
-.shadow:before{
-    content: "";
-    position: absolute;
-    background-color: rgb(237, 203, 9);
-    width: 150px;
-    height: 20px;
-    border-radius: 20px;
-    top:-10px;
-    left:95px;
-
-}
-
-
+/* Cake */
 .cake {
-    position: absolute;
-    overflow: hidden;
-    width: 275px;
-    height: 140px;
-    background-color: coral;
-    top:-130px;
-    left: -101px;
-    border-radius: 30px 30px;
+  position: absolute;
+  overflow: hidden;
+  width: 275px;
+  max-width: 70vw;
+  height: 140px;
+  background-color: coral;
+  top:-130px;
+  left: -101px;
+  border-radius: 30px 30px;
 }
 
-.cake:before{
-    content: "";
-    position: absolute;
-    background-color: brown;
-    width: 275px;
-    height: 15px;
-    top: 75px;
-    box-shadow: 0 30px brown ;
+.cake:before {
+  content: "";
+  position: absolute;
+  background-color: brown;
+  width: 100%;
+  height: 15px;
+  top: 75px;
+  box-shadow: 0 30px brown ;
 }
-
-.cake:after{
-    content: "";
-    position: absolute;
-    background-color: brown;
-    width: 275px;
-    height: 40px;
-    box-shadow: 0 310px rgba(0,0,0,0,07);
-}
-
 
 .chocolate {
-    position: absolute;
-    background-color: brown;
-    width: 25px;
-    height: 35px;
-    top: 25px;
-    left:0;
-    z-index:2;
-    border-radius:  70px;
-     box-shadow: 
-        25px 2px brown,
-   
-        100px 3px brown,
-       
-        150px -5px brown,
-     
-        200px -5px brown,
-     
-        250px 4px brown;
+  position: absolute;
+  background-color: brown;
+  width: 25px;
+  height: 35px;
+  top: 25px;
+  left:0;
+  z-index:2;
+  border-radius: 70px;
+  box-shadow: 
+    25px 2px brown,
+    100px 3px brown,
+    150px -5px brown,
+    200px -5px brown,
+    250px 4px brown;
 }
 
-
-
-.candle{
-    position: absolute;
-    width: 15px;
-    height: 70px;
-    background-color: white;
-    top: -200px;
-    left: 30px;
-    box-shadow: inset 0 -10px #0038A8;
+/* Candle */
+.candle {
+  position: absolute;
+  width: 15px;
+  height: 70px;
+  background-color: white;
+  top: -200px;
+  left: 30px;
+  box-shadow: inset 0 -10px #0038A8;
 }
 
-.candle:before{
-    content:"";
-    position: absolute;
-    width: 15px;
-    height:15px;
-    background-color:#D60270;
-    top:10px;
-    box-shadow: 0 25px #90468b;
-
+.candle:before {
+  content:"";
+  position: absolute;
+  width: 15px;
+  height:15px;
+  background-color:#D60270;
+  top:10px;
+  box-shadow: 0 25px #90468b;
 }
 
-
-.candle:after{
-    content:"";
-    position: absolute;
-    width: 2px;
-    height:15px;
-    background-color: black;
-    top:-15px;
-    left: 6px;
-
+.candle:after {
+  content:"";
+  position: absolute;
+  width: 2px;
+  height:15px;
+  background-color: black;
+  top:-15px;
+  left: 6px;
 }
 
-
+/* Flame */
 .flame {
-    position: absolute;
-    background-color: yellow;
-    opacity:0.9;
-    box-shadow: inset 0 -5px 5px yellow, 5px -5px 20px orangered;
-    background-color:yellow ;
-    width: 20px;
-    top: -240px;
-    border-radius: 50%;
-    height: 30px;
-    left: 26.5px;
-    animation: flame 0.5s infinite;
+  position: absolute;
+  background-color: yellow;
+  opacity:0.9;
+  box-shadow: inset 0 -5px 5px yellow, 5px -5px 20px orangered;
+  width: 20px;
+  top: -240px;
+  border-radius: 50%;
+  height: 30px;
+  left: 26.5px;
+  animation: flame 0.5s infinite;
 }
 
 @keyframes flame {
-    from, to { transform: scale(1,1);}
-    25% {transform: scale(0.9,1.1);}
-    50% {transform: scale(1.1,0.9);}
-    75% {transform: scale(0.95,1.05);}
+  from, to { transform: scale(1,1);}
+  25% {transform: scale(0.9,1.1);}
+  50% {transform: scale(1.1,0.9);}
+  75% {transform: scale(0.95,1.05);}
 }
 
-
-
+/* Smoke */
 .smoke {
   position: absolute;
   width: 15px;
   height: 40px;
-  top: -250px;      /* position above the candle */
+  top: -250px;
   background: radial-gradient(ellipse, rgba(200,200,200,0.6), transparent);
   border-radius: 50%;
   opacity: 0;
@@ -213,23 +185,17 @@ body {
 }
 
 @keyframes smoke {
-  0% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-120px) scale(2);
-  }
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-120px) scale(2); }
 }
 
-
+/* Birthday message */
 .birthday-text {
   position: fixed;
   top: 20%;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 3.5rem;
+  font-size: 2.5rem;
   font-family: "Comic Sans MS", cursive, sans-serif;
   font-weight: bold;
   background: linear-gradient(90deg, #ff178b, #ff006f, #e0408b, #f01b1b);
@@ -249,4 +215,32 @@ body {
 @keyframes bounce {
   0%, 100% { transform: translateX(-50%) translateY(0); }
   50% { transform: translateX(-50%) translateY(-15px); }
+}
+
+/* 📱 Mobile responsiveness */
+@media (max-width: 768px) {
+  .txt h1 {
+    font-size: 1.8rem;
+  }
+
+  .birthday-cake {
+    transform: scale(0.7);
+    left: 0;
+    top: 0;
+  }
+
+  .birthday-text {
+    font-size: 1.6rem;
+    top: 30%;
+    text-align: center;
+  }
+
+  #music-btn {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
+
+  #music-hint {
+    font-size: 0.7rem;
+  }
 }
